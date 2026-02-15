@@ -1,0 +1,119 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&display=swap');
+
+:root {
+    --foreground-rgb: 255, 255, 255;
+    --background-start-rgb: 0, 0, 0;
+    --background-end-rgb: 0, 0, 0;
+}
+
+body {
+    color: rgb(var(--foreground-rgb));
+    background: #000;
+    margin: 0;
+    padding: 0;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* ─── Futuristic hero typography ─── */
+.hero-name {
+    font-family: "Orbitron", sans-serif;
+    font-size: clamp(2rem, 5.5vw, 4.5rem);
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    line-height: 1.1;
+    text-transform: uppercase;
+    text-align: center;
+    max-width: 1000px;
+    padding: 0 1.5rem;
+}
+
+.hero-name .char-span {
+    background: linear-gradient(135deg, #ffffff 0%, #a0a0b0 50%, #ffffff 100%);
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: shimmer 4s ease-in-out infinite;
+}
+
+@keyframes shimmer {
+    0% {
+        background-position: 0% center;
+    }
+
+    50% {
+        background-position: 200% center;
+    }
+
+    100% {
+        background-position: 0% center;
+    }
+}
+
+.hero-tagline {
+    font-family: inherit;
+    font-size: clamp(1rem, 2.2vw, 1.5rem);
+    font-weight: 500;
+    letter-spacing: 0.15em;
+    line-height: 1.4;
+    text-transform: uppercase;
+    color: #6e6e73;
+    text-align: center;
+    margin-top: 1.25rem;
+    will-change: transform, opacity;
+}
+
+.hero-subtitle {
+    font-family: inherit;
+    font-size: clamp(0.8rem, 1.3vw, 1rem);
+    font-weight: 300;
+    letter-spacing: 0.05em;
+    line-height: 1.5;
+    color: #48484a;
+    text-align: center;
+    margin-top: 0.75rem;
+    will-change: transform, opacity;
+}
+
+/* ─── Character-split typing animation utilities ─── */
+.char-span {
+    display: inline-block;
+    will-change: transform, opacity;
+    perspective: 600px;
+}
+
+.typing-cursor {
+    display: inline-block;
+    font-weight: 300;
+    color: rgba(255, 255, 255, 0.7);
+    animation: blink-cursor 0.8s steps(2) infinite;
+    margin-left: 2px;
+    font-size: 1em;
+}
+
+.hero-subtitle .typing-cursor {
+    color: rgba(72, 72, 74, 0.7);
+}
+
+.hero-tagline .typing-cursor {
+    color: rgba(110, 110, 115, 0.7);
+}
+
+@keyframes blink-cursor {
+    0% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
