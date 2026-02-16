@@ -105,343 +105,185 @@ body {
 }
 
 /* ═══════════════════════════════════════════════════════
-   Vertical Left Sidebar Nav
+   Stealth Minimalist Navbar (Horizontal Top)
    ═══════════════════════════════════════════════════════ */
-/* ═══════════════════════════════════════════════════════
-   Vertical Left Sidebar Nav (Apple Glass Style)
-   ═══════════════════════════════════════════════════════ */
-.side-nav {
-    position: fixed;
-    top: 24px;
-    left: 50%;
-    bottom: auto;
-    transform: translateX(-50%);
-    width: auto;
-    height: 54px;
-    /* Reduced from 70px */
-    min-height: 0;
-    z-index: 9999;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    padding: 0 1.25rem;
-    /* Reduced padding */
-    gap: 0.75rem;
-    /* Reduced gap */
-    /* Apple-style glassmorphism floating pill */
-    background: rgba(30, 30, 35, 0.65);
-    backdrop-filter: saturate(180%) blur(40px);
-    -webkit-backdrop-filter: saturate(180%) blur(40px);
-    border: 1px solid rgba(255, 255, 255, 0.12);
-    border-radius: 27px;
-    /* Adjusted radius for new height */
-    box-shadow:
-        0 10px 40px rgba(0, 0, 0, 0.3),
-        0 0 0 1px rgba(255, 255, 255, 0.05);
-    transition: all 0.3s ease;
-}
-
-/* Logo */
-.side-nav__logo {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-decoration: none;
-    margin-bottom: 0;
-    margin-right: 0.25rem;
-    width: 36px;
-    /* Reduced from 44px */
-    height: 36px;
-    border-radius: 10px;
-    transition: background 0.3s ease, transform 0.2s ease;
-}
-
-.side-nav__logo:hover {
-    background: rgba(255, 255, 255, 0.1);
-    transform: scale(1.05);
-}
-
-.side-nav__logo-bracket {
-    display: none;
-    /* Cleaner look without brackets */
-}
-
-.side-nav__logo-text {
-    font-family: inherit;
-    /* Use global modern font */
-    font-weight: 700;
-    font-size: 1rem;
-    /* Reduced font size */
-    color: #ffffff;
-    letter-spacing: -0.02em;
-}
-
-/* Separator - vertical line for horizontal layout */
-.side-nav__line {
-    width: 1px;
-    height: 20px;
-    /* Reduced height */
-    background: rgba(255, 255, 255, 0.15);
-    margin: 0;
-    display: block;
-}
-
-/* Nav links */
-.side-nav__links {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    gap: 0.25rem;
-    width: auto;
-}
-
-.side-nav__link {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 0.15rem;
-    text-decoration: none;
-    width: 40px;
-    /* Reduced from 48px */
-    height: 40px;
-    border-radius: 10px;
-    position: relative;
-    transition: all 0.3s cubic-bezier(0.25, 0.1, 0.25, 1);
-    color: rgba(255, 255, 255, 0.5);
-}
-
-/* Active/Hover state - rounded rectangle style */
-.side-nav__link:hover {
-    background: rgba(255, 255, 255, 0.15);
-    color: #ffffff;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    transform: translateY(-1px);
-}
-
-/* Icon */
-.side-nav__link-icon {
-    font-size: 1.1rem;
-    /* Reduced size */
-    transition: color 0.3s ease;
-    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
-}
-
-.side-nav__link:hover .side-nav__link-icon {
-    color: #ffffff;
-}
-
-/* Label - small and clean */
-.side-nav__link-label {
-    font-size: 0.55rem;
-    font-weight: 500;
-    letter-spacing: 0.02em;
-    opacity: 0.7;
-    margin-top: 0;
-    display: none;
-    /* Hide labels on desktop top bar for cleaner look, or keep if preferred */
-}
-
-.side-nav__link:hover .side-nav__link-label {
-    color: #ffffff;
-    opacity: 1;
-    display: block;
-    /* Show on hover maybe? Or just keep hidden */
-}
-
-/* Removing the sci-fi glowing bar on the left */
-.side-nav__link::before {
-    display: none;
-}
-
-/* Scroll percentage */
-.side-nav__scroll-hint {
-    margin-top: 0;
-    margin-left: 0.5rem;
-    padding-bottom: 0;
-    background: rgba(0, 0, 0, 0.2);
-    padding: 4px 10px;
-    border-radius: 20px;
-    backdrop-filter: blur(4px);
-}
-
-.side-nav__scroll-percent {
-    font-family: inherit;
-    font-size: 0.75rem;
-    font-weight: 600;
-    color: rgba(255, 255, 255, 0.8);
-    font-variant-numeric: tabular-nums;
-}
-
-/* ═══════════════════════════════════════════════════════
-   Custom Right Scrollbar (Apple Glass Style)
-   ═══════════════════════════════════════════════════════ */
-.custom-scrollbar {
+.stealth-nav {
     position: fixed;
     top: 0;
+    left: 0;
     right: 0;
-    bottom: 0;
-    width: 24px;
-    z-index: 9998;
-    display: flex;
-    align-items: stretch;
-    justify-content: center;
-    cursor: pointer;
+    z-index: 9999;
     padding: 2rem 0;
+    pointer-events: none;
+    /* Let clicks pass through empty areas */
+    mix-blend-mode: difference;
+    /* Optional: ensures visibility against bright backgrounds too */
 }
 
-.custom-scrollbar__track {
-    position: relative;
-    width: 2px;
-    background: rgba(255, 255, 255, 0.05);
-    border-radius: 2px;
-    height: 100%;
-}
-
-.custom-scrollbar__thumb {
-    position: absolute;
-    top: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 4px;
-    background: linear-gradient(180deg,
-            rgba(255, 255, 255, 0.1) 0%,
-            rgba(255, 255, 255, 0.4) 100%);
-    border-radius: 4px;
-    transition: height 0.15s ease-out;
-}
-
-.custom-scrollbar__glow {
-    position: absolute;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 6px;
-    height: 6px;
-    background: #ffffff;
-    border-radius: 50%;
-    box-shadow:
-        0 0 10px rgba(255, 255, 255, 0.5),
-        0 0 20px rgba(255, 255, 255, 0.2);
-    transition: top 0.15s ease-out;
-}
-
-.custom-scrollbar__markers {
-    position: absolute;
-    top: 2rem;
-    bottom: 2rem;
-    right: 6px;
+.stealth-nav__list {
     display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+    justify-content: center;
+    align-items: center;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    gap: 0.5rem;
+    pointer-events: auto;
+    /* Re-enable clicks on links */
 }
 
-.custom-scrollbar__marker {
-    width: 4px;
-    height: 1px;
-    background: rgba(255, 255, 255, 0.1);
+.stealth-nav__item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+/* Logo specific styles */
+.stealth-nav__link.logo-link {
+    font-weight: 700;
+    font-size: 0.9rem;
+    letter-spacing: 0.2em;
+    margin-right: 1.5rem;
+    color: #e0e0e0;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+}
+
+.logo-ver {
+    font-size: 0.5em;
+    color: #bdbdbd;
+    vertical-align: super;
+    margin-left: 2px;
+}
+
+/* Navigation Links */
+.stealth-nav__link {
+    font-family: "Orbitron", sans-serif;
+    font-size: 0.75rem;
+    text-decoration: none;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: #757575;
+    /* Dimmed monochrome */
+    transition: color 0.3s ease, text-shadow 0.3s ease;
+    position: relative;
+}
+
+.stealth-nav__link:hover {
+    color: #f5f5f5;
+    /* Bright silver on hover */
+    text-shadow: 0 0 8px rgba(255, 255, 255, 0.6);
+}
+
+/* Separator Dot */
+.stealth-nav__separator {
+    color: #424242;
+    font-size: 0.5rem;
+    margin-top: 1px;
+    transition: color 0.3s ease, text-shadow 0.3s ease;
+}
+
+.stealth-nav__item:hover .stealth-nav__separator {
+    color: #d4af37;
+    /* Gold accent on hover nearby */
+    text-shadow: 0 0 5px rgba(212, 175, 55, 0.8);
+}
+
+/* Active state simulation (would need JS logic, but hover works well for now) */
+.stealth-nav__link:active {
+    color: #d4af37;
+    /* Muted Gold */
 }
 
 /* ═══════════════════════════════════════════════════════
-   Sparkle Star Particles
+   Glassmorphic WebKit Scrollbar
+   ═══════════════════════════════════════════════════════ */
+/* Width */
+::-webkit-scrollbar {
+    width: 14px;
+    background: transparent;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    background: transparent;
+    margin: 4px 0;
+    /* Vertical margin for track */
+}
+
+/* Thumb (Glassmorphic Capsule) */
+::-webkit-scrollbar-thumb {
+    background-color: rgba(255, 255, 255, 0.15);
+    /* Translucent 'dark grey' (white on black) */
+    border-radius: 20px;
+    border: 4px solid transparent;
+    /* Creates the transparent margin/floating effect */
+    background-clip: content-box;
+    /* Ensures background is only inside the border */
+    /* Smoked glass effect via box-shadow since backdrop-filter doesn't apply to scrollbars */
+    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.05);
+}
+
+/* Hover state */
+::-webkit-scrollbar-thumb:hover {
+    background-color: rgba(255, 255, 255, 0.25);
+    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.1);
+}
+
+/* ═══════════════════════════════════════════════════════
+   Sparkle Particles (Monochrome)
    ═══════════════════════════════════════════════════════ */
 .sparkle-star {
     position: fixed;
     pointer-events: none;
     z-index: 99999;
     border-radius: 50%;
-    animation: sparkle-fade 0.6s ease-out forwards;
+    background: white;
+    animation: sparkle-fade 0.5s ease-out forwards;
 }
 
 @keyframes sparkle-fade {
     0% {
-        opacity: 1;
-        transform: translate(-50%, -50%) scale(1) rotate(0deg);
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(0.5);
     }
 
     50% {
-        opacity: 0.8;
-        transform: translate(-50%, -50%) scale(1.5) rotate(180deg);
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1.2);
     }
 
     100% {
         opacity: 0;
-        transform: translate(-50%, -50%) scale(0.3) rotate(360deg);
+        transform: translate(-50%, -50%) scale(0.1);
     }
 }
 
-/* ═══════════════════════════════════════════════════════
-   Hide Default Scrollbar
-   ═══════════════════════════════════════════════════════ */
+/* Firefox Support */
 html {
-    scrollbar-width: none;
-    -ms-overflow-style: none;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(255, 255, 255, 0.15) transparent;
 }
 
-html::-webkit-scrollbar {
-    display: none;
-}
-
-/* ═══════════════════════════════════════════════════════
-   Mobile: Bottom bar layout
-   ═══════════════════════════════════════════════════════ */
 @media (max-width: 768px) {
-    .side-nav {
-        top: auto;
-        bottom: 24px;
-        left: 24px;
-        right: 24px;
-        transform: none;
-        width: auto;
-        height: 70px;
-        /* Slightly taller for rounded buttons */
-        flex-direction: row;
-        padding: 0 1rem;
-        border: 1px solid rgba(255, 255, 255, 0.1);
-        border-radius: 35px;
-        justify-content: space-between;
-        align-items: center;
-        background: rgba(30, 30, 35, 0.85);
-        /* Darker/More solid for mobile readability */
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    .stealth-nav {
+        padding: 1.5rem 0;
+        background: linear-gradient(to bottom, rgba(0, 0, 0, 0.8), transparent);
     }
 
-    .side-nav::after {
+    .stealth-nav__list {
+        gap: 1rem;
+    }
+
+    .stealth-nav__separator {
         display: none;
     }
 
-    .side-nav__logo,
-    .side-nav__line,
-    .side-nav__scroll-hint {
+    .logo-ver {
         display: none;
     }
 
-    .side-nav__links {
-        flex-direction: row;
-        gap: 0;
-        flex: 1;
-        justify-content: space-between;
-        padding: 0 1rem;
-    }
-
-    .side-nav__link {
-        width: 48px;
-        height: 48px;
-        padding: 0;
-    }
-
-    .side-nav__link::before {
+    .stealth-nav__link.logo-link {
         display: none;
-    }
-
-    .side-nav__link:hover {
-        transform: translateY(-2px);
-    }
-
-    .custom-scrollbar {
-        display: none;
+        /* Hide logo on mobile to save space? Or keep it. Let's hide it for cleaner look */
     }
 }

@@ -3,11 +3,11 @@
 import { useState, useEffect, useCallback, useRef } from "react";
 
 const navLinks = [
-    { label: "Home", href: "#", icon: "⌂" },
-    { label: "About", href: "#about", icon: "◈" },
-    { label: "Projects", href: "#projects", icon: "◇" },
-    { label: "Skills", href: "#skills", icon: "△" },
-    { label: "Contact", href: "#contact", icon: "✦" },
+    { label: "Home", href: "#" },
+    { label: "About", href: "#about" },
+    { label: "Projects", href: "#projects" },
+    { label: "Skills", href: "#skills" },
+    { label: "Contact", href: "#contact" },
 ];
 
 /* ── Sparkle star particle ── */
@@ -26,7 +26,6 @@ export default function Navbar() {
     const [sparkles, setSparkles] = useState<Sparkle[]>([]);
     const [isHoveringInteractive, setIsHoveringInteractive] = useState(false);
     const navRef = useRef<HTMLElement>(null);
-    const scrollbarRef = useRef<HTMLDivElement>(null);
 
     // Track scroll progress
     useEffect(() => {
@@ -41,33 +40,32 @@ export default function Navbar() {
 
     // Sparkle effect on mousemove
     const handleSparkle = useCallback((e: MouseEvent) => {
+        // Monochrome / Silver palette for "Stealth" look
         const colors = [
-            "rgba(255, 255, 255, 0.9)",
-            "rgba(230, 230, 230, 0.8)",
-            "rgba(255, 255, 255, 0.6)",
-            "rgba(200, 200, 200, 0.7)",
-            "rgba(255, 255, 255, 0.85)",
+            "rgba(255, 255, 255, 0.8)",
+            "rgba(224, 224, 224, 0.7)",
+            "rgba(192, 192, 192, 0.6)",
+            "rgba(255, 215, 0, 0.3)", // Subtle hint of gold
         ];
 
         const newSparkle: Sparkle = {
             id: sparkleId++,
             x: e.clientX,
             y: e.clientY,
-            size: Math.random() * 8 + 4,
+            size: Math.random() * 6 + 2, // Smaller, sharper particles
             color: colors[Math.floor(Math.random() * colors.length)],
         };
 
-        setSparkles((prev) => [...prev.slice(-12), newSparkle]);
+        setSparkles((prev) => [...prev.slice(-15), newSparkle]);
 
         setTimeout(() => {
             setSparkles((prev) => prev.filter((s) => s.id !== newSparkle.id));
-        }, 600);
+        }, 500);
     }, []);
 
-    // Attach sparkle listener to nav and scrollbar
+    // Attach sparkle listener to nav
     useEffect(() => {
         const nav = navRef.current;
-        const scrollbar = scrollbarRef.current;
 
         const onMove = (e: MouseEvent) => handleSparkle(e);
         const onEnter = () => setIsHoveringInteractive(true);
@@ -78,11 +76,6 @@ export default function Navbar() {
             nav.addEventListener("mouseenter", onEnter);
             nav.addEventListener("mouseleave", onLeave);
         }
-        if (scrollbar) {
-            scrollbar.addEventListener("mousemove", onMove);
-            scrollbar.addEventListener("mouseenter", onEnter);
-            scrollbar.addEventListener("mouseleave", onLeave);
-        }
 
         return () => {
             if (nav) {
@@ -90,82 +83,40 @@ export default function Navbar() {
                 nav.removeEventListener("mouseenter", onEnter);
                 nav.removeEventListener("mouseleave", onLeave);
             }
-            if (scrollbar) {
-                scrollbar.removeEventListener("mousemove", onMove);
-                scrollbar.removeEventListener("mouseenter", onEnter);
-                scrollbar.removeEventListener("mouseleave", onLeave);
-            }
         };
     }, [handleSparkle]);
 
-    // Click scrollbar to jump to position
-    const handleScrollbarClick = (e: React.MouseEvent<HTMLDivElement>) => {
-        const rect = e.currentTarget.getBoundingClientRect();
-        const clickY = e.clientY - rect.top;
-        const percent = clickY / rect.height;
-        const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-        window.scrollTo({ top: percent * docHeight, behavior: "smooth" });
-    };
-
     return (
         <>
-            {/* ── Left vertical navbar ── */}
-            <nav ref={navRef} className="side-nav">
-                {/* Logo */}
-                <a href="#" className="side-nav__logo">
-                    <span className="side-nav__logo-bracket">[</span>
-                    <span className="side-nav__logo-text">S</span>
-                    <span className="side-nav__logo-bracket">]</span>
-                </a>
+            {/* ── Stealth Horizontal Navbar ── */}
+            <nav ref={navRef} className="stealth-nav">
+                <ul className="stealth-nav__list">
+                    {/* Logo as first item */}
+                    <li className="stealth-nav__item logo-item">
+                        <a href="#" className="stealth-nav__link logo-link">
+                            SSP_HUD <span className="logo-ver">v2.0</span>
+                        </a>
+                    </li>
 
-                {/* Vertical line separator */}
-                <div className="side-nav__line" />
-
-                {/* Nav links */}
-                <ul className="side-nav__links">
+                    {/* Navigation links separated by dots */}
                     {navLinks.map((link) => (
-                        <li key={link.label}>
-                            <a href={link.href} className="side-nav__link" title={link.label}>
-                                <span className="side-nav__link-icon">{link.icon}</span>
-                                <span className="side-nav__link-label">{link.label}</span>
+                        <li key={link.label} className="stealth-nav__item">
+                            <span className="stealth-nav__separator">•</span>
+                            <a href={link.href} className="stealth-nav__link">
+                                {link.label}
                             </a>
                         </li>
                     ))}
+
+                    {/* Scroll Percentage Display */}
+                    <li className="stealth-nav__item">
+                        <span className="stealth-nav__separator">•</span>
+                        <span className="stealth-nav__link" style={{ cursor: 'default', color: '#d4af37' }}>
+                            {Math.round(scrollProgress * 100)}%
+                        </span>
+                    </li>
                 </ul>
-
-                {/* Bottom line separator */}
-                <div className="side-nav__line" />
-
-                {/* Scroll indicator at bottom */}
-                <div className="side-nav__scroll-hint">
-                    <span className="side-nav__scroll-percent">
-                        {Math.round(scrollProgress * 100)}%
-                    </span>
-                </div>
             </nav>
-
-            {/* ── Right scrollbar ── */}
-            <div
-                ref={scrollbarRef}
-                className="custom-scrollbar"
-                onClick={handleScrollbarClick}
-            >
-                <div className="custom-scrollbar__track">
-                    <div
-                        className="custom-scrollbar__thumb"
-                        style={{ height: `${Math.max(scrollProgress * 100, 2)}%` }}
-                    />
-                    <div
-                        className="custom-scrollbar__glow"
-                        style={{ top: `${scrollProgress * 100}%` }}
-                    />
-                </div>
-                <div className="custom-scrollbar__markers">
-                    {[0, 25, 50, 75, 100].map((p) => (
-                        <div key={p} className="custom-scrollbar__marker" />
-                    ))}
-                </div>
-            </div>
 
             {/* ── Sparkle particles ── */}
             {sparkles.map((sparkle) => (
@@ -178,13 +129,13 @@ export default function Navbar() {
                         width: sparkle.size,
                         height: sparkle.size,
                         background: sparkle.color,
-                        boxShadow: `0 0 ${sparkle.size * 2}px ${sparkle.color}`,
+                        boxShadow: `0 0 ${sparkle.size}px ${sparkle.color}`,
                     }}
                 />
             ))}
 
-            {/* Global cursor override style */}
-            {isHoveringInteractive && <style>{`* { cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Ctext y='18' font-size='16'%3E✦%3C/text%3E%3C/svg%3E") 12 12, pointer !important; `}</style>}
+            {/* Global cursor override style (Crosshair for HUD feel) */}
+            {isHoveringInteractive && <style>{`* { cursor: crosshair !important; }`}</style>}
         </>
     );
 }
