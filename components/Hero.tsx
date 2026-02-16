@@ -124,8 +124,8 @@ export default function Hero() {
             const nameTl = gsap.timeline({
                 scrollTrigger: {
                     trigger: containerRef.current,
-                    start: "62% top",
-                    end: "76% top",
+                    start: "35% top",
+                    end: "60% top",
                     scrub: 1,
                 },
             });
@@ -148,7 +148,19 @@ export default function Hero() {
                 nameTl.fromTo(
                     nameCursor,
                     { opacity: 0 },
-                    { opacity: 1, duration: 0.1 },
+                    {
+                        opacity: 1,
+                        duration: 0.1,
+                        onComplete: () => {
+                            gsap.to(nameCursor, {
+                                opacity: 0,
+                                repeat: -1,
+                                yoyo: true,
+                                duration: 0.4,
+                                ease: "steps(1)",
+                            });
+                        },
+                    },
                     "-=0.1"
                 );
             }
@@ -159,8 +171,8 @@ export default function Hero() {
             const taglineTl = gsap.timeline({
                 scrollTrigger: {
                     trigger: containerRef.current,
-                    start: "74% top",
-                    end: "85% top",
+                    start: "35% top",
+                    end: "60% top",
                     scrub: 1,
                 },
             });
@@ -182,7 +194,19 @@ export default function Hero() {
                 taglineTl.fromTo(
                     taglineCursor,
                     { opacity: 0 },
-                    { opacity: 1, duration: 0.1 },
+                    {
+                        opacity: 1,
+                        duration: 0.1,
+                        onComplete: () => {
+                            gsap.to(taglineCursor, {
+                                opacity: 0,
+                                repeat: -1,
+                                yoyo: true,
+                                duration: 0.4,
+                                ease: "steps(1)",
+                            });
+                        },
+                    },
                     "-=0.1"
                 );
             }
@@ -193,8 +217,8 @@ export default function Hero() {
             const subtitleTl = gsap.timeline({
                 scrollTrigger: {
                     trigger: containerRef.current,
-                    start: "83% top",
-                    end: "93% top",
+                    start: "35% top",
+                    end: "60% top",
                     scrub: 1,
                 },
             });
@@ -216,7 +240,19 @@ export default function Hero() {
                 subtitleTl.fromTo(
                     subtitleCursor,
                     { opacity: 0 },
-                    { opacity: 0.6, duration: 0.1 },
+                    {
+                        opacity: 0.6,
+                        duration: 0.1,
+                        onComplete: () => {
+                            gsap.to(subtitleCursor, {
+                                opacity: 0,
+                                repeat: -1,
+                                yoyo: true,
+                                duration: 0.4,
+                                ease: "steps(1)",
+                            });
+                        },
+                    },
                     "-=0.1"
                 );
             }
@@ -251,8 +287,9 @@ export default function Hero() {
 
                 {/* Typewriter-style text overlay */}
                 <div className="absolute inset-0 z-10 flex flex-col items-center justify-center pointer-events-none select-none">
-                    <h1 ref={nameRef} className="hero-name">
-                        <SplitText text="Swoyam Siddhi Pattanayak" />
+                    <h1 ref={nameRef} className="hero-name flex flex-col items-center gap-2">
+                        <span className="block"><SplitText text="Swoyam Siddhi" /></span>
+                        <span className="block"><SplitText text="Pattanayak" /></span>
                     </h1>
                     <p ref={taglineRef} className="hero-tagline">
                         <SplitText text="Machine Learning Engineer" />
