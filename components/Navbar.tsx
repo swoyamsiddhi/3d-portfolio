@@ -94,7 +94,7 @@ export default function Navbar() {
                     {/* Logo as first item */}
                     <li className="stealth-nav__item logo-item">
                         <a href="#" className="stealth-nav__link logo-link">
-                            SSP_HUD <span className="logo-ver">v2.0</span>
+                            SSP <span className="logo-ver">...</span>
                         </a>
                     </li>
 

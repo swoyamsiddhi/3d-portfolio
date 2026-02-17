@@ -13,10 +13,12 @@ function SplitText({
     text,
     className,
     charClass = "char-span",
+    showCursor = true,
 }: {
     text: string;
     className?: string;
     charClass?: string;
+    showCursor?: boolean;
 }) {
     return (
         <span className={className}>
@@ -25,7 +27,7 @@ function SplitText({
                     {char === " " ? "\u00A0" : char}
                 </span>
             ))}
-            <span className="typing-cursor">|</span>
+            {showCursor && <span className="typing-cursor">|</span>}
         </span>
     );
 }
@@ -33,8 +35,9 @@ function SplitText({
 export default function Hero() {
     const canvasRef = useRef<HTMLCanvasElement>(null);
     const containerRef = useRef<HTMLDivElement>(null);
+    const textContainerRef = useRef<HTMLDivElement>(null); // New ref for fading text
     const nameRef = useRef<HTMLHeadingElement>(null);
-    const taglineRef = useRef<HTMLParagraphElement>(null);
+    const taglineRef = useRef<HTMLHeadingElement>(null);
     const subtitleRef = useRef<HTMLParagraphElement>(null);
     const [images, setImages] = useState<HTMLImageElement[]>([]);
     const [imagesLoaded, setImagesLoaded] = useState(false);
@@ -104,22 +107,22 @@ export default function Hero() {
             scrollTrigger: {
                 trigger: containerRef.current,
                 start: "top top",
-                end: "70% bottom",
+                end: "70% bottom", // Matches the 500vh scroll length
                 scrub: 0.5,
             },
             onUpdate: () => renderFrame(Math.round(sequence.frame)),
         });
 
-        // --- Typewriter-style text reveal (synced to scroll) ---
+        // ─── Typewriter Entrance (Scroll Triggered) ───
         const nameChars = nameRef.current?.querySelectorAll(".char-span");
         const taglineChars = taglineRef.current?.querySelectorAll(".char-span");
         const subtitleChars = subtitleRef.current?.querySelectorAll(".char-span");
 
-        const nameCursor = nameRef.current?.querySelector(".typing-cursor");
+        const finalNameCursor = nameRef.current?.querySelector(".block:last-child .typing-cursor");
         const taglineCursor = taglineRef.current?.querySelector(".typing-cursor");
         const subtitleCursor = subtitleRef.current?.querySelector(".typing-cursor");
 
-        // ─── Name typing animation ───
+        // Name Animation
         if (nameChars && nameChars.length > 0) {
             const nameTl = gsap.timeline({
                 scrollTrigger: {
@@ -144,29 +147,21 @@ export default function Hero() {
                 }
             );
 
-            if (nameCursor) {
-                nameTl.fromTo(
-                    nameCursor,
-                    { opacity: 0 },
-                    {
-                        opacity: 1,
-                        duration: 0.1,
-                        onComplete: () => {
-                            gsap.to(nameCursor, {
-                                opacity: 0,
-                                repeat: -1,
-                                yoyo: true,
-                                duration: 0.4,
-                                ease: "steps(1)",
-                            });
-                        },
-                    },
-                    "-=0.1"
-                );
+            if (finalNameCursor) {
+                // Ensure cursor is visible when text appears
+                nameTl.fromTo(finalNameCursor, { opacity: 0 }, { opacity: 1, duration: 0.1 }, "<");
+                // Blinking effect separate from scroll? 
+                // Creating a separate tween for blinking that starts after nameTl?
+                // Hard to do with scrub.
+                // We'll just leave opacity 1. 
+                // Or maybe the user wanted the cursor to appear?
+                // In previous code I had it blinking. 
+                // With scrub, "blink" (repeat yoyo) doesn't work well.
+                // I'll just fade it in.
             }
         }
 
-        // ─── Tagline typing animation ───
+        // Tagline Animation
         if (taglineChars && taglineChars.length > 0) {
             const taglineTl = gsap.timeline({
                 scrollTrigger: {
@@ -189,30 +184,12 @@ export default function Hero() {
                     ease: "back.out(1.4)",
                 }
             );
-
             if (taglineCursor) {
-                taglineTl.fromTo(
-                    taglineCursor,
-                    { opacity: 0 },
-                    {
-                        opacity: 1,
-                        duration: 0.1,
-                        onComplete: () => {
-                            gsap.to(taglineCursor, {
-                                opacity: 0,
-                                repeat: -1,
-                                yoyo: true,
-                                duration: 0.4,
-                                ease: "steps(1)",
-                            });
-                        },
-                    },
-                    "-=0.1"
-                );
+                taglineTl.fromTo(taglineCursor, { opacity: 0 }, { opacity: 1, duration: 0.1 }, "<");
             }
         }
 
-        // ─── Subtitle typing animation ───
+        // Subtitle Animation
         if (subtitleChars && subtitleChars.length > 0) {
             const subtitleTl = gsap.timeline({
                 scrollTrigger: {
@@ -227,7 +204,7 @@ export default function Hero() {
                 subtitleChars,
                 { opacity: 0, y: 15, scale: 0.85 },
                 {
-                    opacity: 0.6,
+                    opacity: 1,
                     y: 0,
                     scale: 1,
                     duration: 0.05,
@@ -235,26 +212,8 @@ export default function Hero() {
                     ease: "back.out(1.2)",
                 }
             );
-
             if (subtitleCursor) {
-                subtitleTl.fromTo(
-                    subtitleCursor,
-                    { opacity: 0 },
-                    {
-                        opacity: 0.6,
-                        duration: 0.1,
-                        onComplete: () => {
-                            gsap.to(subtitleCursor, {
-                                opacity: 0,
-                                repeat: -1,
-                                yoyo: true,
-                                duration: 0.4,
-                                ease: "steps(1)",
-                            });
-                        },
-                    },
-                    "-=0.1"
-                );
+                subtitleTl.fromTo(subtitleCursor, { opacity: 0 }, { opacity: 1, duration: 0.1 }, "<");
             }
         }
 
@@ -269,31 +228,40 @@ export default function Hero() {
     return (
         <div ref={containerRef} className="relative h-[500vh]">
             <div className="sticky top-0 h-screen w-full overflow-hidden bg-black">
-                <canvas
-                    ref={canvasRef}
-                    className="absolute inset-0 h-full w-full"
-                />
+                <div className="absolute inset-0 z-0">
+                    <canvas ref={canvasRef} className="h-full w-full object-cover" />
+                </div>
 
                 {!imagesLoaded && (
                     <div className="absolute inset-0 flex items-center justify-center bg-black z-30">
                         <div className="flex flex-col items-center gap-4">
                             <div className="w-8 h-8 border-2 border-white/30 border-t-white rounded-full animate-spin" />
-                            <p className="text-white/50 text-sm tracking-[0.2em] uppercase font-light">
-                                Loading
-                            </p>
+                            <p className="text-white/50 text-sm tracking-[0.2em] uppercase font-light">Loading</p>
                         </div>
                     </div>
                 )}
 
-                {/* Typewriter-style text overlay */}
-                <div className="absolute inset-0 z-10 flex flex-col items-center justify-center pointer-events-none select-none">
+                {/* Text Overlay */}
+                <div
+                    ref={textContainerRef}
+                    className="absolute inset-0 z-10 flex flex-col items-center justify-center pointer-events-none select-none"
+                >
                     <h1 ref={nameRef} className="hero-name flex flex-col items-center gap-2">
-                        <span className="block"><SplitText text="Swoyam Siddhi" /></span>
-                        <span className="block"><SplitText text="Pattanayak" /></span>
+                        <span className="block">
+                            <SplitText text="SWOYAM " showCursor={false} />
+                            <span className="italic-accent inline-block">
+                                <SplitText text="SIDDHI" showCursor={false} />
+                            </span>
+                        </span>
+                        <span className="block">
+                            <SplitText text="PATTANAYAK" />
+                        </span>
                     </h1>
-                    <p ref={taglineRef} className="hero-tagline">
-                        <SplitText text="Machine Learning Engineer" />
-                    </p>
+
+                    <h2 ref={taglineRef} className="hero-tagline">
+                        <SplitText text="MACHINE LEARNING ENGINEER" />
+                    </h2>
+
                     <p ref={subtitleRef} className="hero-subtitle">
                         <SplitText text="Building intelligence. Designing the future." />
                     </p>
