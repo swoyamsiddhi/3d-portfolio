@@ -10,6 +10,11 @@ const FeaturedProjects = () => {
     const triggerRef = useRef(null);
 
     useEffect(() => {
+        // Wait for layout to settle before initializing ScrollTrigger
+        const timer = setTimeout(() => {
+            ScrollTrigger.refresh();
+        }, 100);
+
         const pin = gsap.fromTo(
             sectionRef.current,
             {
@@ -25,11 +30,14 @@ const FeaturedProjects = () => {
                     end: "2000 top",
                     scrub: 0.6,
                     pin: true,
+                    anticipatePin: 1,
+                    invalidateOnRefresh: true,
                 },
             }
         );
 
         return () => {
+            clearTimeout(timer);
             pin.kill();
         };
     }, []);
