@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Playfair_Display, Inter, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
+import SmoothScroll from "@/components/SmoothScroll";
 
 const playfair = Playfair_Display({ subsets: ["latin"], variable: "--font-playfair" });
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
@@ -20,8 +21,10 @@ export default function RootLayout({
     return (
         <html lang="en">
             <body className={`${playfair.variable} ${inter.variable} ${jetbrains.variable} font-sans bg-black`}>
-                <Navbar />
-                {children}
+                <SmoothScroll>
+                    <Navbar />
+                    {children}
+                </SmoothScroll>
             </body>
         </html>
     );

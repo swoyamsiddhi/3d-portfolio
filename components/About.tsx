@@ -64,6 +64,30 @@ export default function About() {
                 ease: "power3.out"
             });
 
+            // Parallax effect on headline
+            gsap.to(".animate-headline", {
+                scrollTrigger: {
+                    trigger: containerRef.current,
+                    start: "top bottom",
+                    end: "bottom top",
+                    scrub: true,
+                },
+                y: -60,
+                ease: "none",
+            });
+
+            // Parallax effect on image
+            gsap.to(".animate-image", {
+                scrollTrigger: {
+                    trigger: containerRef.current,
+                    start: "top bottom",
+                    end: "bottom top",
+                    scrub: true,
+                },
+                y: -40,
+                ease: "none",
+            });
+
         }, containerRef);
 
         return () => ctx.revert();
@@ -73,7 +97,7 @@ export default function About() {
         <section
             id="about"
             ref={containerRef}
-            className="relative z-10 -mt-[50vh] w-full min-h-screen bg-[#f8f9fa] text-black py-20 px-4 md:px-12 flex flex-col justify-center overflow-hidden shadow-[0_-20px_50px_rgba(0,0,0,0.5)]"
+            className="relative z-10 -mt-[50vh] w-full min-h-screen bg-[#f8f9fa] text-black py-20 px-4 md:px-12 flex flex-col justify-center overflow-hidden shadow-[0_-20px_50px_rgba(0,0,0,0.5)] rounded-[2rem]"
         >
             {/* Top Section */}
             <div className="w-full max-w-[1400px] mx-auto mb-20 md:mb-32 relative">

@@ -13,7 +13,7 @@ export default function Contact() {
     const [email, setEmail] = useState("");
 
     return (
-        <footer className="relative w-full bg-black text-white overflow-hidden">
+        <footer className="relative w-full bg-black text-white overflow-hidden rounded-[2rem] mx-2 my-2">
             {/* ─── TOP INFORMATION GRID ─── */}
             <div className="w-full px-8 md:px-16 lg:px-20 pt-20 pb-10">
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8">

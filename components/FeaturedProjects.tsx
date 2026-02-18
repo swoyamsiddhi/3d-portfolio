@@ -43,7 +43,7 @@ const FeaturedProjects = () => {
     }, []);
 
     return (
-        <section className="relative bg-black text-white overflow-hidden">
+        <section className="relative bg-black text-white overflow-hidden rounded-3xl mx-2 my-2">
             {/* Main Scroll Container */}
             <div ref={triggerRef} className="relative h-screen w-screen">
                 {/* Global Layout Elements (Absolute to pinned container) */}
