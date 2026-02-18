@@ -19,7 +19,7 @@ export default function Contact() {
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8">
 
                     {/* ── LEFT AREA: Contact + Details ── */}
-                    <div className="lg:col-span-6 xl:col-span-7">
+                    <div className="lg:col-span-5 xl:col-span-5">
                         {/* Label */}
                         <span className="font-sans text-[10px] uppercase tracking-[0.3em] text-white/40 block mb-6">
                             Let&apos;s Talk
@@ -27,11 +27,11 @@ export default function Contact() {
 
                         {/* Main Email Heading */}
                         <a
-                            href="mailto:hello@swoyam.ai"
+                            href="mailto:swoyamsiddhipattanayak@gmail.com"
                             className="group inline-block"
                         >
-                            <h2 className="font-serif text-4xl sm:text-5xl md:text-6xl lg:text-7xl leading-[1.1] tracking-tight border-b-4 border-white pb-3 transition-colors duration-300 group-hover:text-white/70">
-                                hello@<span className="italic">swoyam</span>.ai
+                            <h2 className="font-serif text-2xl sm:text-3xl md:text-4xl lg:text-5xl leading-[1.1] tracking-tight border-b-4 border-white pb-3 transition-colors duration-300 group-hover:text-white/70">
+                                <span className="italic">swoyamsiddhi</span>pattanayak@gmail.com
                             </h2>
                         </a>
 
@@ -99,17 +99,14 @@ export default function Contact() {
                     </div>
 
                     {/* ── CENTER-RIGHT: Social Buttons ── */}
-                    <div className="lg:col-span-3 xl:col-span-3 flex flex-col items-start lg:items-center gap-3 pt-2">
-                        {socials.map((s, i) => (
+                    <div className="lg:col-span-3 lg:col-start-7 xl:col-span-3 xl:col-start-7 flex flex-col items-start lg:items-end gap-3 pt-2">
+                        {socials.map((s) => (
                             <a
                                 key={s.label}
                                 href={s.href}
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 className="rounded-full border border-white/40 px-7 py-2.5 text-xs font-sans uppercase tracking-[0.2em] text-white/80 hover:bg-white hover:text-black transition-all duration-300"
-                                style={{
-                                    marginLeft: i % 2 === 0 ? "0" : "1.5rem",
-                                }}
                             >
                                 {s.label}
                             </a>
