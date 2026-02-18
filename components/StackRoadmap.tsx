@@ -34,6 +34,10 @@ export default function StackRoadmap() {
         const ctx = gsap.context(() => {
             if (!panelRef.current || !triggerRef.current) return;
 
+            const timer = setTimeout(() => {
+                ScrollTrigger.refresh();
+            }, 200);
+
             // 4 panels total: 1 header + 3 blocks
             const totalPanels = 4;
             const scrollDistance = (totalPanels - 1) * 100; // vw units
@@ -48,8 +52,12 @@ export default function StackRoadmap() {
                     scrub: 0.8,
                     start: "top top",
                     end: `+=${window.innerHeight * 3}`,
+                    anticipatePin: 1,
+                    invalidateOnRefresh: true,
                 },
             });
+
+            return () => clearTimeout(timer);
         }, sectionRef);
 
         return () => ctx.revert();
@@ -59,7 +67,7 @@ export default function StackRoadmap() {
         <section
             ref={sectionRef}
             id="stack-roadmap"
-            className="relative z-[1] bg-[#f8f9fa] overflow-hidden rounded-3xl mx-2 my-2"
+            className="relative z-10 bg-[#f8f9fa] overflow-hidden rounded-3xl mx-2 my-2"
         >
             {/* Trigger — gets pinned */}
             <div ref={triggerRef} className="relative w-full h-screen overflow-hidden">
