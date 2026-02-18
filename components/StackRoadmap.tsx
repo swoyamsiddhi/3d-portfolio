@@ -59,7 +59,7 @@ export default function StackRoadmap() {
         <section
             ref={sectionRef}
             id="stack-roadmap"
-            className="relative bg-[#f8f9fa] overflow-hidden rounded-3xl mx-2 my-2"
+            className="relative z-[1] bg-[#f8f9fa] overflow-hidden rounded-3xl mx-2 my-2"
         >
             {/* Trigger — gets pinned */}
             <div ref={triggerRef} className="relative w-full h-screen overflow-hidden">
