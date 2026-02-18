@@ -9,9 +9,9 @@ const config: Config = {
     theme: {
         extend: {
             fontFamily: {
-                serif: ['"Playfair Display"', "serif"],
-                sans: ["Inter", "sans-serif"],
-                mono: ['"JetBrains Mono"', "monospace"],
+                serif: ["var(--font-playfair)", "serif"],
+                sans: ["var(--font-inter)", "sans-serif"],
+                mono: ["var(--font-jetbrains)", "monospace"],
             },
             backgroundImage: {
                 "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
