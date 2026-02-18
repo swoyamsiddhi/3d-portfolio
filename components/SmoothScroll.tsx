@@ -11,6 +11,10 @@ export default function SmoothScroll({ children }: { children: React.ReactNode }
     const lenisRef = useRef<Lenis | null>(null);
 
     useEffect(() => {
+        // Force scroll to top on load to prevent pinned sections from overlapping
+        window.history.scrollRestoration = "manual";
+        window.scrollTo(0, 0);
+
         // Initialize Lenis smooth scroll
         const lenis = new Lenis({
             duration: 1.2,       // Scroll duration (higher = smoother/slower)

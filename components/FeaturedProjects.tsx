@@ -43,7 +43,7 @@ const FeaturedProjects = () => {
     }, []);
 
     return (
-        <section className="relative bg-black text-white overflow-hidden rounded-3xl mx-2 my-2">
+        <section id="projects" className="relative bg-black text-white overflow-hidden rounded-3xl mx-2 my-2">
             {/* Main Scroll Container */}
             <div ref={triggerRef} className="relative h-screen w-screen">
                 {/* Global Layout Elements (Absolute to pinned container) */}
@@ -60,7 +60,7 @@ const FeaturedProjects = () => {
                 </div>
 
                 {/* Section Heading (Absolute to pinned container) */}
-                <div className="absolute top-12 left-1/2 -translate-x-1/2 z-50 mix-blend-difference">
+                <div className="absolute top-12 left-1/2 -translate-x-1/2 z-50 mix-blend-difference" data-anim="fade-up-blur">
                     <span className="font-serif italic text-2xl text-white/90 tracking-widest border-b border-white/30 pb-1">
                         Selected Works
                     </span>
@@ -90,12 +90,12 @@ const FeaturedProjects = () => {
                         </div>
 
                         {/* Description */}
-                        <div className="absolute bottom-20 right-20 max-w-sm z-30">
+                        <div className="absolute bottom-20 right-20 max-w-sm z-30" data-anim="fade-up">
                             <p className="font-sans text-sm text-gray-300 leading-relaxed text-justify">
                                 Stores, analyzes, and compares medical scans with dates.
                                 Powered by Gemini 2.5 Flash for medical-grade analysis.
                             </p>
-                            <div className="mt-4 flex items-center gap-4">
+                            <div className="mt-4 flex items-center gap-4" data-anim="scale-in">
                                 <span className="text-xs border border-white/20 px-2 py-1 rounded-full text-white/60">REACT</span>
                                 <span className="text-xs border border-white/20 px-2 py-1 rounded-full text-white/60">GEMINI AI</span>
                                 <span className="text-xs border border-white/20 px-2 py-1 rounded-full text-white/60">MEDICAL</span>
@@ -143,7 +143,7 @@ const FeaturedProjects = () => {
                         {/* Number 02 & Description */}
                         <div className="absolute bottom-[10vh] left-[20vw] z-30">
                             <span className="font-serif text-[10rem] leading-none text-white/20 block">02</span>
-                            <p className="font-sans text-sm text-gray-400 max-w-xs mt-4">
+                            <p data-anim="fade-up" className="font-sans text-sm text-gray-400 max-w-xs mt-4">
                                 Advanced predictive modeling for financial markets using reinforcement learning agents.
                             </p>
                         </div>

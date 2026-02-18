@@ -13,7 +13,7 @@ export default function Contact() {
     const [email, setEmail] = useState("");
 
     return (
-        <footer className="relative w-full bg-black text-white overflow-hidden rounded-[2rem] mx-2 my-2">
+        <footer id="contact" className="relative w-full bg-black text-white overflow-hidden rounded-[2rem] mx-2 my-2">
             {/* ─── TOP INFORMATION GRID ─── */}
             <div className="w-full px-5 sm:px-8 md:px-16 lg:px-20 pt-14 sm:pt-20 pb-10">
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8">
@@ -21,7 +21,7 @@ export default function Contact() {
                     {/* ── LEFT AREA: Contact + Details ── */}
                     <div className="lg:col-span-5 xl:col-span-5">
                         {/* Label */}
-                        <span className="font-sans text-[10px] uppercase tracking-[0.3em] text-white/40 block mb-6">
+                        <span data-anim="fade-up" className="font-sans text-[10px] uppercase tracking-[0.3em] text-white/40 block mb-6">
                             Let&apos;s Talk
                         </span>
 
@@ -29,6 +29,7 @@ export default function Contact() {
                         <a
                             href="mailto:swoyamsiddhipattanayak@gmail.com"
                             className="group inline-block"
+                            data-anim="fade-up-blur"
                         >
                             <h2 className="font-serif text-xl sm:text-2xl md:text-4xl lg:text-5xl leading-[1.1] tracking-tight border-b-4 border-white pb-3 transition-colors duration-300 group-hover:text-white/70 break-words">
                                 <span className="italic">swoyamsiddhi</span>pattanayak@gmail.com
@@ -36,7 +37,7 @@ export default function Contact() {
                         </a>
 
                         {/* Details Grid */}
-                        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6 mt-8 sm:mt-12">
+                        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6 mt-8 sm:mt-12" data-anim="fade-up">
                             <div>
                                 <span className="block font-sans text-[10px] uppercase tracking-[0.3em] text-white/30 mb-2">
                                     Role
@@ -65,7 +66,7 @@ export default function Contact() {
 
                         {/* Newsletter */}
                         <div className="mt-14">
-                            <p className="font-sans text-xs text-white/40 uppercase tracking-[0.2em] mb-4">
+                            <p data-anim="fade-up" className="font-sans text-xs text-white/40 uppercase tracking-[0.2em] mb-4">
                                 Join my network for updates!
                             </p>
                             <div className="relative w-full max-w-md">
@@ -99,7 +100,7 @@ export default function Contact() {
                     </div>
 
                     {/* ── CENTER-RIGHT: Social Buttons ── */}
-                    <div className="lg:col-span-3 lg:col-start-7 xl:col-span-3 xl:col-start-7 flex flex-row flex-wrap sm:flex-col items-start lg:items-end gap-3 pt-2">
+                    <div className="lg:col-span-3 lg:col-start-7 xl:col-span-3 xl:col-start-7 flex flex-row flex-wrap sm:flex-col items-start lg:items-end gap-3 pt-2" data-anim="slide-right">
                         {socials.map((s) => (
                             <a
                                 key={s.label}
@@ -114,7 +115,7 @@ export default function Contact() {
                     </div>
 
                     {/* ── FAR RIGHT: Misc & Accent ── */}
-                    <div className="lg:col-span-3 xl:col-span-2 flex flex-col items-start lg:items-end gap-4 text-right pt-2">
+                    <div className="lg:col-span-3 xl:col-span-2 flex flex-col items-start lg:items-end gap-4 text-right pt-2" data-anim="fade-up">
                         <a href="#" className="font-sans text-[10px] uppercase tracking-[0.2em] text-white/30 hover:text-white/60 transition-colors">
                             Terms & Conditions
                         </a>
@@ -151,6 +152,7 @@ export default function Contact() {
 
                 {/* Giant name */}
                 <h1
+                    data-anim="fade-up-blur"
                     className="font-serif font-bold text-white leading-[0.85] select-none"
                     style={{
                         fontSize: "clamp(3.5rem, 18vw, 22rem)",
