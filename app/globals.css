@@ -271,24 +271,49 @@ html {
 
 @media (max-width: 768px) {
     .stealth-nav {
-        padding: 1.5rem 0;
+        padding: 1rem 0;
         background: linear-gradient(to bottom, rgba(0, 0, 0, 0.8), transparent);
     }
 
     .stealth-nav__list {
-        gap: 1rem;
+        gap: 0.4rem;
+        padding: 0 0.5rem;
+        flex-wrap: wrap;
+        justify-content: center;
     }
 
     .stealth-nav__separator {
         display: none;
     }
 
-    .logo-ver {
-        display: none;
+    .stealth-nav__link {
+        font-size: 0.6rem;
+        letter-spacing: 0.1em;
     }
 
     .stealth-nav__link.logo-link {
+        font-size: 0.7rem;
+        margin-right: 0.5rem;
+    }
+
+    .logo-ver {
         display: none;
-        /* Hide logo on mobile to save space? Or keep it. Let's hide it for cleaner look */
+    }
+}
+
+@media (max-width: 480px) {
+    .stealth-nav__list {
+        gap: 0.3rem;
+        padding: 0 0.3rem;
+    }
+
+    .stealth-nav__link {
+        font-size: 0.5rem;
+        letter-spacing: 0.05em;
+    }
+
+    .stealth-nav__link.logo-link {
+        font-size: 0.6rem;
+        margin-right: 0.3rem;
     }
 }
